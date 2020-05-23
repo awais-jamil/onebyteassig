@@ -10,4 +10,9 @@ interface ApiInterface {
     @POST("./accounts:signInWithPassword?key=AIzaSyCZ1RHhSXtnWgbkh709bfn5jNBWuViT5vY")
     fun login(@Body body: HashMap<String, Any>):
             Observable<Model.Result>
+
+    @Headers("Content-Type: application/json")
+    @POST("./accounts:signUp?key=AIzaSyCZ1RHhSXtnWgbkh709bfn5jNBWuViT5vY")
+    fun signUp(@Body body: HashMap<String, Any>):
+            Observable<Model.Result>
 }

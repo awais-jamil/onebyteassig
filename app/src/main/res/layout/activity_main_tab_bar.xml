@@ -26,7 +26,6 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-
     <fragment
         android:id="@+id/nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
@@ -42,7 +41,10 @@
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffff"
+        android:background="@color/colorPrimary"
+        app:menu="@menu/tab_menu"
+        app:itemIconTint="@drawable/tab_selection_color"
+        app:itemTextColor="@drawable/tab_selection_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" app:labelVisibilityMode="labeled"/>

@@ -1,5 +1,6 @@
 package com.example.onebyteassign.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 
 import com.example.onebyteassign.R
+import com.example.onebyteassign.activities.AuthActivity
+import com.example.onebyteassign.activities.MainTabBarActivity
 import com.example.onebyteassign.supports.BaseFragment
 import com.example.onebyteassign.viewmodels.AuthViewModel
 import kotlinx.android.synthetic.main.auth_fragment.view.*
@@ -42,7 +45,7 @@ class AuthFragment : BaseFragment() {
         view.btn_signup.setOnClickListener {
             if(!view.s_input_email.text.toString().equals("") && !view.s_input_password.text.toString().equals("") && !view.s_input_name.text.toString().equals("") && !view.s_input_phone.text.toString().equals("")){
                 displayLoadingIndicator("Signing Up...")
-                viewModel.login(view.input_email.text.toString(), view.input_password.text.toString())
+                viewModel.signup(view.s_input_email.text.toString(), view.s_input_password.text.toString(), view.s_input_name.text.toString(), view.s_input_phone.text.toString())
             }
         }
 
@@ -61,14 +64,22 @@ class AuthFragment : BaseFragment() {
             Observer { state ->
 
                 if(state == AuthViewModel.authStatus.Success) {
-
                     hideLoadingIndicator()
-                    showPrompt(context!!, "Success!", "Login Sccuessfull")
+
+                    val intent = Intent(context, MainTabBarActivity::class.java)
+
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+
+                    startActivity(intent)
+
+                    activity!!.finish()
+
                 }
 
                 else if(state == AuthViewModel.authStatus.Error) {
                     hideLoadingIndicator()
-                    showPrompt(context!!, "Error!", "Login Failed")
+                    showPrompt(context!!, "Error!", "Request Failed")
                 }
             })
 

@@ -42,6 +42,26 @@ class AuthViewModel : ViewModel() {
                         authState.value = authStatus.Success
                     },
                     { error ->
+                        authState.value = authStatus.Error
+                    }
+                )
+    }
+
+    fun signup(email: String, password: String, name: String, phone: String) {
+
+        var hashmap = HashMap<String, Any>()
+        hashmap.set("email", email)
+        hashmap.set("password", password)
+
+        disposable =
+            apiServe.signUp(hashmap)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    { result ->
+                        authState.value = authStatus.Success
+                    },
+                    { error ->
                         Log.e("error", error.message)
                         Log.e("error1", error.localizedMessage)
                         Log.e("error1", error.toString())
