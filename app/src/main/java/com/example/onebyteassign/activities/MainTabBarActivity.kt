@@ -1,12 +1,13 @@
-package com.example.onebyteassign
+package com.example.onebyteassign.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.onebyteassign.R
 
-class MainActivity : AppCompatActivity() {
+class MainTabBarActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main_tab_bar)
     }
 }
