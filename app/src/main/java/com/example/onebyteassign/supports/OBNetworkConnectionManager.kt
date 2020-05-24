@@ -6,7 +6,7 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import androidx.annotation.RequiresApi
 
-class NetworkConnectionManager {
+class OBNetworkConnectionManager {
     companion object {
 
         val isConnected: Boolean

@@ -9,6 +9,9 @@ object OBSharedPrefrences {
     private const val MODE = Context.MODE_PRIVATE
     private lateinit var preferences: SharedPreferences
 
+    private const val KEY_AUTH_VERIFICATION_ID = "KEY_AUTH_VERIFICATION_ID"
+    private const val KEY_AUTH_RESEND_TOKEN = "KEY_AUTH_RESEND_TOKEN"
+
     fun init(context: Context) {
         preferences = context.getSharedPreferences(NAME, MODE)
     }
@@ -22,6 +25,18 @@ object OBSharedPrefrences {
         val editor = edit()
         operation(editor)
         editor.apply()
+    }
+
+    fun setAuthVerificationId(authId: String) {
+
+        preferences.edit {
+            it.putString(KEY_AUTH_VERIFICATION_ID, authId)
+        }
+    }
+
+    fun getAuthVerificationId(): String? {
+
+        return  preferences.getString(KEY_AUTH_VERIFICATION_ID, null)
     }
 
 }

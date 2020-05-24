@@ -28,13 +28,11 @@ class MainTabBarActivity : AppCompatActivity() {
 
         bottomNavigationView = findViewById(R.id.bottom_navigation)
 
-        bottomNavigationView.isItemHorizontalTranslationEnabled = false
+        bottomNavigationView.isItemHorizontalTranslationEnabled = true
 
         bottomNavigationView.setupWithNavController(navController)
 
         val topLevelScreens = setOf(
-            R.id.homeFragment,
-            R.id.homeFragment,
             R.id.homeFragment,
             R.id.settingsFragment
         )

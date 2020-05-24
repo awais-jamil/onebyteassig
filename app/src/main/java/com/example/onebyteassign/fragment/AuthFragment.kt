@@ -45,7 +45,7 @@ class AuthFragment : BaseFragment() {
         view.btn_signup.setOnClickListener {
             if(!view.s_input_email.text.toString().equals("") && !view.s_input_password.text.toString().equals("") && !view.s_input_name.text.toString().equals("") && !view.s_input_phone.text.toString().equals("")){
                 displayLoadingIndicator("Signing Up...")
-                viewModel.signup(view.s_input_email.text.toString(), view.s_input_password.text.toString(), view.s_input_name.text.toString(), view.s_input_phone.text.toString())
+                viewModel.signup(view.s_input_email.text.toString(), view.s_input_password.text.toString())
             }
         }
 
@@ -75,6 +75,10 @@ class AuthFragment : BaseFragment() {
 
                     activity!!.finish()
 
+                }
+
+                if(state == AuthViewModel.authStatus.SignUpSuccess) {
+                    viewModel.saveUserToFirestore(view.s_input_name.text.toString(), view.s_input_phone.text.toString(), view.s_input_email.text.toString())
                 }
 
                 else if(state == AuthViewModel.authStatus.Error) {

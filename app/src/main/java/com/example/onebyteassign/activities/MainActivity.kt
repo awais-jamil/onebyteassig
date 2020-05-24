@@ -8,6 +8,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.onebyteassign.R
+import com.example.onebyteassign.models.OBCurrentUser
+import com.example.onebyteassign.networkLayer.OBAuthenticationService
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,18 +20,48 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        Handler().postDelayed(Runnable { gotToNext() }, 1000)
+
+        if(OBAuthenticationService.needsAuthentication()) {
+
+            goToOnBoarding()
+
+        }
+
+        else {
+
+            proceedToLoggedFlow()
+
+        }
     }
 
-    fun gotToNext(){
+    fun goToOnBoarding(){
         val intent = Intent(applicationContext, AuthActivity::class.java)
 
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
 
-        startActivity(intent)
+        Handler().postDelayed(Runnable {
+            startActivity(intent)
+            finish()
 
-        finish()
+        }, 1000)
+
+    }
+
+    fun proceedToLoggedFlow(){
+
+        OBCurrentUser.reloadUser()
+
+        val intent = Intent(applicationContext, MainTabBarActivity::class.java)
+
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+
+        Handler().postDelayed(Runnable {
+            startActivity(intent)
+            finish()
+
+        }, 1000)
     }
 
 }
