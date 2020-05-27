@@ -1,11 +1,10 @@
 package com.example.onebyteassign.activities
 
 import android.content.res.Configuration
-import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import androidx.annotation.RequiresApi
+import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -15,6 +14,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.onebyteassign.R
+import com.example.onebyteassign.models.OBCurrentUser
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 
@@ -23,12 +23,12 @@ class MainTabBarActivity : AppCompatActivity() {
 
     lateinit var bottomNavigationView: BottomNavigationView
     lateinit var toolbar: Toolbar
+    lateinit var navUsername: TextView
     private lateinit var toggle: ActionBarDrawerToggle
 
     var mDrawerLayout: DrawerLayout? = null
     var nv: NavigationView? = null
 
-    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_tab_bar)
@@ -48,7 +48,9 @@ class MainTabBarActivity : AppCompatActivity() {
 
         nv = findViewById(R.id.nav_view) as (NavigationView)
         nv!!.setNavigationItemSelectedListener(navSelectListener)
-
+        val headerView: View = nv!!.getHeaderView(0)
+        navUsername =
+            headerView.findViewById<View>(R.id.nav_header_textView) as TextView
         toggle = ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.open, R.string.close)
 
         mDrawerLayout!!.addDrawerListener(toggle)
@@ -69,10 +71,13 @@ class MainTabBarActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration.Builder(topLevelScreens).build()
 
         setupActionBarWithNavController(navController, appBarConfiguration)
-//        val headerView: View = mDrawerLayout!!.nav_header
-//        val navUsername =
-//            headerView.findViewById<View>(R.id.nav_header_textView) as TextView
-//        navUsername.text = OBCurrentUser.user.name
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        navUsername.text = OBCurrentUser.firebaseUser.email
     }
 
     override fun onSupportNavigateUp(): Boolean {

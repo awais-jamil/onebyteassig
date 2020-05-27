@@ -11,8 +11,11 @@ import com.google.firebase.firestore.Query
 object OBCurrentUser {
 
     lateinit var firebaseUser: FirebaseUser
+    @JvmStatic
     lateinit var user: OBUser
     var firebaseService: OBFirebaseService
+    @JvmStatic
+    var des: String= "sasas"
 
     init {
 
