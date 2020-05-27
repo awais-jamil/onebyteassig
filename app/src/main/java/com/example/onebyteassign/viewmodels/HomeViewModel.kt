@@ -4,11 +4,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.onebyteassign.models.Categories
 import com.example.onebyteassign.models.Movie
+import com.example.onebyteassign.models.OBCurrentUser
 import com.example.onebyteassign.networkLayer.OBFirebaseService
 import com.google.firebase.firestore.FirebaseFirestore
 
 
 class HomeViewModel : ViewModel() {
+
+    var user =  MutableLiveData<OBCurrentUser>()
 
     var movies =  MutableLiveData<ArrayList<Movie>>()
     var categories =  MutableLiveData<ArrayList<Categories>>()

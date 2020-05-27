@@ -7,25 +7,22 @@
     android:orientation="vertical"
     android:background="#CACBCC">
 
-
-s
-    g<view
+    <view
         class="com.example.onebyteassign.custom.HorizontalView"
         android:id="@+id/category"
         android:layout_width="match_parent"
-        android:layout_height="140dp"/>
+        android:layout_height="120dp"/>
 
     <view
         class="com.example.onebyteassign.custom.HorizontalView"
         android:id="@+id/latest"
         android:layout_width="match_parent"
-        android:layout_height="250dp"/>
+        android:layout_height="230dp"/>
 
     <view
         class="com.example.onebyteassign.custom.HorizontalView"
         android:id="@+id/popular"
         android:layout_width="match_parent"
-        android:layout_height="250dp"/>
-
+        android:layout_height="230dp"/>
 
 </LinearLayout>

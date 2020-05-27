@@ -17,6 +17,7 @@ class AuthViewModel : ViewModel() {
     enum class authStatus{
         Progress,
         Success,
+        LoginSuccess,
         SignUpSuccess,
         Error
     }
